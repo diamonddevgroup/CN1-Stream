@@ -1,8 +1,12 @@
 CN1-Stream
 ======================
 
-![img](https://release-badges-generator.vercel.app/api/releases.svg?user=diamonddevgroup&repo=cn1-stream&gradient=238636,238636)
-[![License](https://img.shields.io/github/license/tubone24/release-badges-generator.svg)](LICENSE)
+![GitHub release](https://img.shields.io/github/v/release/diamonddevgroup/CN1-Stream?color=#238636&style=plastic&link=https://github.com/diamonddevgroup/CN1-Stream/releases&link=https://github.com/diamonddevgroup/CN1-Stream/releases)
+![GitHub release date](https://img.shields.io/github/release-date/diamonddevgroup/CN1-Stream?style=plastic&link=https://github.com/diamonddevgroup/CN1-Stream/releases&link=https://github.com/diamonddevgroup/CN1-Stream/releases)
+![GitHub repo size](https://img.shields.io/github/repo-size/diamonddevgroup/CN1-Stream?style=plastic)
+![GitHub lib size](https://img.shields.io/github/size/diamonddevgroup/CN1-Stream/CN1-Stream.cn1lib?style=plastic)
+![GitHub last commit](https://img.shields.io/github/last-commit/diamonddevgroup/CN1-Stream?color=blue&style=plastic&link=https://github.com/diamonddevgroup/CN1-Stream/commits&link=https://github.com/diamonddevgroup/CN1-Stream/commits)
+![GitHub license](https://img.shields.io/github/license/diamonddevgroup/CN1-Stream?style=plastic&link=https://github.com/diamonddevgroup/CN1-Stream#license&link=https://github.com/diamonddevgroup/CN1-Stream#license)
 
 A lightweight Stream API from Java 8 rewritten on iterators for Codename One. Adapted from LSA, refactored, and cleaned up for CN1 compatibility.
 
@@ -182,6 +186,21 @@ Download [latest release](https://github.com/diamonddevgroup/CN1-Stream/releases
 or grab via CN1 Extensions Library in Codename One Control Center.
 
 Do `Refresh Libs` after downloading.
+
+
+## Contribution
+
+You are welcomed to improve the code.
+
+ - Fork the project
+ - commit your code
+ - create a pull request.
+
+You can also improve the documentation, methods, and classes used.
+
+
+## Author
+Diamond Dev Group.
 
 
 ## License
