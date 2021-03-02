@@ -4,7 +4,7 @@ CN1-Stream
 ![img](https://release-badges-generator.vercel.app/api/releases.svg?user=diamonddevgroup&repo=cn1-stream&gradient=238636,238636)
 [![License](https://img.shields.io/github/license/tubone24/release-badges-generator.svg)](LICENSE)
 
-Stream API from Java 8 rewritten on iterators for Codename One. Adapted from LSA, refactored and cleaned up for CN1 compatibility.
+A lightweight Stream API from Java 8 rewritten on iterators for Codename One. Adapted from LSA, refactored, and cleaned up for CN1 compatibility.
 
 
 ### Includes
