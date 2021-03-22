@@ -76,7 +76,7 @@ public abstract class SpinedBuffer<E, T_ARR> implements Iterable<E> {
             throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
 
         this.initialChunkPower = Math.max(MIN_CHUNK_POWER,
-                Integer.SIZE - Integer.numberOfLeadingZeros(initialCapacity - 1));
+                32 - Integer.numberOfLeadingZeros(initialCapacity - 1));
         curChunk = newArray(1 << initialChunkPower);
     }
 
