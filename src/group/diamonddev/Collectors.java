@@ -90,7 +90,7 @@ public final class Collectors {
      * @param <T> the type of the input elements
      *
      * @return a {@code Collector}
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public static <T> Collector<T, ?, List<T>> toUnmodifiableList() {
         return Collectors.collectingAndThen(Collectors.<T>toList(), new UnaryOperator<List<T>>() {
@@ -139,7 +139,7 @@ public final class Collectors {
      * @param <T> the type of the input elements
      *
      * @return a {@code Collector}
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public static <T> Collector<T, ?, Set<T>> toUnmodifiableSet() {
         return Collectors.collectingAndThen(Collectors.<T>toSet(), new UnaryOperator<Set<T>>() {
@@ -252,7 +252,7 @@ public final class Collectors {
      *
      * @return a {@code Collector}
      * @see #toUnmodifiableMap(Function, Function, BinaryOperator)
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public static <T, K, V> Collector<T, ?, Map<K, V>> toUnmodifiableMap(
             final Function<? super T, ? extends K> keyMapper,
@@ -277,7 +277,7 @@ public final class Collectors {
      *                      values associated with the same key
      *
      * @return a {@code Collector}
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public static <T, K, V> Collector<T, ?, Map<K, V>> toMap(
             final Function<? super T, ? extends K> keyMapper,
@@ -305,7 +305,7 @@ public final class Collectors {
      * @param mapFactory    a supplier function that provides new {@code Map}
      *
      * @return a {@code Collector}
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public static <T, K, V, M extends Map<K, V>> Collector<T, ?, M> toMap(
             final Function<? super T, ? extends K> keyMapper,
@@ -341,7 +341,7 @@ public final class Collectors {
      *                      values associated with the same key
      *
      * @return a {@code Collector}
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public static <T, K, V> Collector<T, ?, Map<K, V>> toUnmodifiableMap(
             final Function<? super T, ? extends K> keyMapper,
@@ -970,7 +970,7 @@ public final class Collectors {
      * @param predicate a predicate used for classifying input elements
      *
      * @return a {@code Collector}
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public static <T> Collector<T, ?, Map<Boolean, List<T>>> partitioningBy(
             Predicate<? super T> predicate) {
@@ -988,7 +988,7 @@ public final class Collectors {
      * @param downstream the collector of partitioned elements
      *
      * @return a {@code Collector}
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public static <T, D, A> Collector<T, ?, Map<Boolean, D>> partitioningBy(
             final Predicate<? super T> predicate,
@@ -1038,7 +1038,7 @@ public final class Collectors {
      * @param merger      the function which merges two results into the single one
      *
      * @return a {@code Collector}
-     * @since 1.2.2
+     * @since 1.0.0
      */
     public static <T, R1, R2, R> Collector<T, ?, R> teeing(
             final Collector<? super T, ?, R1> downstream1,

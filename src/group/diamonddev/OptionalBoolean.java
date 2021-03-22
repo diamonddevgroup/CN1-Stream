@@ -161,7 +161,7 @@ public final class OptionalBoolean {
      *
      * @return a result of the transforming function
      * @throws NullPointerException if {@code function} is null
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public <R> R custom(Function<OptionalBoolean, R> function) {
         Objects.requireNonNull(function);
@@ -188,7 +188,7 @@ public final class OptionalBoolean {
      *
      * @return this {@code OptionalBoolean} if the value is present and doesn't matches predicate,
      * otherwise an empty {@code OptionalBoolean}
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public OptionalBoolean filterNot(BooleanPredicate predicate) {
         return filter(BooleanPredicate.Util.negate(predicate));
@@ -276,7 +276,7 @@ public final class OptionalBoolean {
      *
      * @return inner value if present
      * @throws NoSuchElementException if inner value is not present
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public boolean orElseThrow() {
         if (!isPresent) {

@@ -6,7 +6,7 @@ package group.diamonddev;
  * @param <T> the type of the second element
  *
  * @author Diamond
- * @since 1.1.2
+ * @since 1.0.0
  */
 public final class IntPair<T> {
 

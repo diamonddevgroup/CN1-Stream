@@ -33,7 +33,7 @@ import java.io.IOException;
  * holding (such as open files).
  *
  * @author Diamond
- * @since 1.5
+ * @since 1.0.0
  */
 public interface Closeable extends AutoCloseable {
 

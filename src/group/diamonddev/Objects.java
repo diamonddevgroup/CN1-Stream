@@ -39,7 +39,7 @@ public final class Objects {
      * @return {@code true} if objects are deeply equals, {@code false} otherwise
      * @see Arrays#deepEquals(Object[], Object[])
      * @see Objects#equals(Object, Object)
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public static boolean deepEquals(Object a, Object b) {
         return (a == b)
@@ -170,7 +170,7 @@ public final class Objects {
      * @return a source object if it is not {@code null}
      * @throws NullPointerException if object is {@code null}
      * @see #requireNonNull(Object)
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public static <T> T requireNonNull(T obj, Supplier<String> messageSupplier) {
         if (obj == null)
@@ -189,7 +189,7 @@ public final class Objects {
      *
      * @return the first object if it is non-{@code null},
      * the non-{@code null} second object otherwise.
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public static <T> T requireNonNullElse(T obj, T defaultObj) {
         return (obj != null) ? obj : requireNonNull(defaultObj, "defaultObj");
@@ -206,7 +206,7 @@ public final class Objects {
      *
      * @return the first object if it is non-{@code null},
      * the non-{@code null} supplier's result otherwise
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public static <T> T requireNonNullElseGet(T obj, Supplier<? extends T> supplier) {
         if (obj != null) return obj;
@@ -222,7 +222,7 @@ public final class Objects {
      *
      * @return a collection
      * @throws NullPointerException if collection or its elements are {@code null}
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public static <T> Collection<T> requireNonNullElements(Collection<T> collection) {
         requireNonNull(collection);
@@ -239,7 +239,7 @@ public final class Objects {
      *
      * @return {@code true} if the object reference is {@code null}, {@code false} otherwise
      * @see Predicate
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public static boolean isNull(Object obj) {
         return obj == null;
@@ -253,7 +253,7 @@ public final class Objects {
      * @return {@code false} if the object reference is {@code null}, {@code true} otherwise
      * @see Predicate
      * @see Predicate.Util#notNull()
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public static boolean nonNull(Object obj) {
         return obj != null;

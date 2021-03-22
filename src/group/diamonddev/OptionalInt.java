@@ -149,7 +149,7 @@ public final class OptionalInt {
      *
      * @return this {@code OptionalInt}
      * @see #ifPresent(IntConsumer)
-     * @since 1.1.2
+     * @since 1.0.0
      */
     public OptionalInt executeIfPresent(IntConsumer consumer) {
         ifPresent(consumer);
@@ -162,7 +162,7 @@ public final class OptionalInt {
      * @param action action that invokes if value absent
      *
      * @return this {@code OptionalInt}
-     * @since 1.1.2
+     * @since 1.0.0
      */
     public OptionalInt executeIfAbsent(Runnable action) {
         if (!isPresent())
@@ -178,7 +178,7 @@ public final class OptionalInt {
      *
      * @return a result of the transforming function
      * @throws NullPointerException if {@code function} is null
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public <R> R custom(Function<OptionalInt, R> function) {
         Objects.requireNonNull(function);
@@ -206,7 +206,7 @@ public final class OptionalInt {
      *
      * @return this {@code OptionalInt} if the value is present and doesn't matches predicate,
      * otherwise an empty {@code OptionalInt}
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public OptionalInt filterNot(IntPredicate predicate) {
         return filter(IntPredicate.Util.negate(predicate));
@@ -335,7 +335,7 @@ public final class OptionalInt {
      *
      * @return inner value if present
      * @throws NoSuchElementException if inner value is not present
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public int orElseThrow() {
         if (!isPresent) {

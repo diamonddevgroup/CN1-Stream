@@ -11,7 +11,7 @@ CN1-Stream
 A lightweight Stream API from Java 8 rewritten on iterators for Codename One. Adapted from LSA, refactored, and cleaned up for CN1 compatibility.
 
 
-### Includes
+## Includes
 
  + Functional interfaces (`Supplier`, `Function`, `Consumer` etc);
  + `Stream`/`IntStream`/`LongStream`/`DoubleStream` (without parallel processing, but with a variety of additional methods and with custom operators);
@@ -20,7 +20,7 @@ A lightweight Stream API from Java 8 rewritten on iterators for Codename One. Ad
  + `Objects` from Java 7.
 
 
-### Usage
+## Usage
 
 ```java
 Stream.of(/* array | list | set | map | anything based on Iterator/Iterable interface */)
@@ -155,6 +155,19 @@ In addition to back-ported Java 8 Stream operators, the library provides:
   ```java
   Stream.of("a", "b", "c")
       .mapIndexed((i, s) -> s + Integer.toString(i)) // [a0, b1, c2]
+  ```
+
+- `mapMulti` / `mapMultiToInt` / `mapMultiToLong` / `mapMultiToDouble` - applies a mapper function to each element for producing replacing elements
+
+  ```java
+  Stream.of(1, 2, 3, 4)
+      .mapMulti((a, consumer) -> {
+          consumer.accept(a); // value
+          consumer.accept(-a); // negated value
+          if (a % 2 == 0) {
+             consumer.accept(a * 2); // multiply even value by 2
+          }
+      }) // [1, -1, 2, -2, 4, 3, -3, 4, -4, 8]
   ```
 
 

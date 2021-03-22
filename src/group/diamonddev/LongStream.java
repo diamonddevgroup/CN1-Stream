@@ -4,6 +4,7 @@ import group.diamonddev.function.*;
 import group.diamonddev.internal.Compose;
 import group.diamonddev.internal.Operators;
 import group.diamonddev.internal.Params;
+import group.diamonddev.internal.SpinedBuffer;
 import group.diamonddev.iterator.PrimitiveIndexedIterator;
 import group.diamonddev.iterator.PrimitiveIterator;
 import group.diamonddev.operator.*;
@@ -198,7 +199,7 @@ public final class LongStream implements Closeable {
      *
      * @return the new stream
      * @throws NullPointerException if {@code op} is null
-     * @since 1.1.5
+     * @since 1.0.0
      */
     public static LongStream iterate(
             final long seed,
@@ -247,12 +248,12 @@ public final class LongStream implements Closeable {
      *
      * @param a    the first stream
      * @param b    the second stream
-     * @param rest the other streams
+     * @param rest the rest of streams
      *
      * @return the new concatenated stream
      * @throws NullPointerException if {@code a} or {@code b}
      *                              or {@code rest} is null
-     * @since 1.2.2
+     * @since 1.0.0
      */
     public static LongStream concat(
             final LongStream a,
@@ -287,7 +288,7 @@ public final class LongStream implements Closeable {
     }
 
     /**
-     * Applies custom operator on stream.
+     * Applies a custom operator on a stream.
      * <p>
      * Transforming function can return {@code LongStream} for intermediate operations,
      * or any value for terminal operation.
@@ -371,7 +372,7 @@ public final class LongStream implements Closeable {
      * Returns a {@code Stream} consisting of the elements of this stream,
      * each boxed to an {@code Long}.
      *
-     * <p>This is an lazy intermediate operation.
+     * <p>This is a lazy intermediate operation.
      *
      * @return a {@code Stream} consistent of the elements of this stream,
      * each boxed to an {@code Long}
@@ -396,7 +397,7 @@ public final class LongStream implements Closeable {
      *
      * @return the new stream
      * @see #concat(LongStream, LongStream)
-     * @since 1.2.2
+     * @since 1.0.0
      */
     public LongStream prepend(LongStream stream) {
         return LongStream.concat(stream, this);
@@ -418,7 +419,7 @@ public final class LongStream implements Closeable {
      *
      * @return the new stream
      * @see #concat(LongStream, LongStream)
-     * @since 1.2.2
+     * @since 1.0.0
      */
     public LongStream append(LongStream stream) {
         return LongStream.concat(this, stream);
@@ -654,6 +655,31 @@ public final class LongStream implements Closeable {
     }
 
     /**
+     * Returns a stream consisting of the results of replacing each element of
+     * this stream with the contents of a mapped stream produced by applying
+     * the provided mapping function to each element.
+     *
+     * <p>This is an intermediate operation.
+     *
+     * @param mapper the mapper function used to apply to each element for producing replacing elements
+     *
+     * @return the new stream
+     * @see Stream#mapMulti(group.diamonddev.function.BiConsumer)
+     * @see LongStream#flatMap(group.diamonddev.function.LongFunction)
+     * @since 1.0.1
+     */
+    public LongStream mapMulti(final LongStream.LongMapMultiConsumer mapper) {
+        return flatMap(new LongFunction<LongStream>() {
+            @Override
+            public LongStream apply(long value) {
+                SpinedBuffer.OfLong buffer = new SpinedBuffer.OfLong();
+                mapper.accept(value, buffer);
+                return LongStream.of(buffer.iterator());
+            }
+        });
+    }
+
+    /**
      * Returns a stream consisting of the distinct elements of this stream.
      *
      * <p>This is a stateful intermediate operation.
@@ -746,7 +772,7 @@ public final class LongStream implements Closeable {
     }
 
     /**
-     * Returns a {@code LongStream} produced by iterative application of a accumulation function
+     * Returns a {@code LongStream} produced by iterative application of an accumulation function
      * to reduction value and next element of the current stream.
      * Produces a {@code LongStream} consisting of {@code value1}, {@code acc(value1, value2)},
      * {@code acc(acc(value1, value2), value3)}, etc.
@@ -772,7 +798,7 @@ public final class LongStream implements Closeable {
     }
 
     /**
-     * Returns a {@code LongStream} produced by iterative application of a accumulation function
+     * Returns a {@code LongStream} produced by iterative application of an accumulation function
      * to an initial element {@code identity} and next element of the current stream.
      * Produces a {@code LongStream} consisting of {@code identity}, {@code acc(identity, value1)},
      * {@code acc(acc(identity, value1), value2)}, etc.
@@ -968,7 +994,7 @@ public final class LongStream implements Closeable {
 
     /**
      * Performs a reduction on the elements of this stream, using the provided
-     * identity value and an associative accumulation function, and returns the
+     * identity value, and an associative accumulation function, and returns the
      * reduced value.
      *
      * <p>The {@code identity} value must be an identity for the accumulator
@@ -1132,7 +1158,7 @@ public final class LongStream implements Closeable {
      * Tests whether all elements match the given predicate.
      * May not evaluate the predicate on all elements if not necessary
      * for determining the result. If the stream is empty then
-     * {@code false} is returned and the predicate is not evaluated.
+     * {@code false} is returned, and the predicate is not evaluated.
      *
      * <p>This is a short-circuiting terminal operation.
      *
@@ -1164,7 +1190,7 @@ public final class LongStream implements Closeable {
      * Tests whether all elements match the given predicate.
      * May not evaluate the predicate on all elements if not necessary for
      * determining the result. If the stream is empty then {@code true} is
-     * returned and the predicate is not evaluated.
+     * returned, and the predicate is not evaluated.
      *
      * <p>This is a short-circuiting terminal operation.
      *
@@ -1182,7 +1208,7 @@ public final class LongStream implements Closeable {
      * @param predicate the predicate used to match elements
      *
      * @return {@code true} if either all elements of the stream match the
-     * provided predicate or the stream is empty, otherwise {@code false}
+     * provided predicate, or the stream is empty, otherwise {@code false}
      */
     public boolean allMatch(LongPredicate predicate) {
         while (iterator.hasNext()) {
@@ -1196,7 +1222,7 @@ public final class LongStream implements Closeable {
      * Tests whether no elements match the given predicate.
      * May not evaluate the predicate on all elements if not necessary for
      * determining the result. If the stream is empty then {@code true} is
-     * returned and the predicate is not evaluated.
+     * returned, and the predicate is not evaluated.
      *
      * <p>This is a short-circuiting terminal operation.
      *
@@ -1214,7 +1240,7 @@ public final class LongStream implements Closeable {
      * @param predicate the predicate used to match elements
      *
      * @return {@code true} if either no elements of the stream match the
-     * provided predicate or the stream is empty, otherwise {@code false}
+     * provided predicate, or the stream is empty, otherwise {@code false}
      */
     public boolean noneMatch(LongPredicate predicate) {
         while (iterator.hasNext()) {
@@ -1249,7 +1275,7 @@ public final class LongStream implements Closeable {
      * @param other the other element to return if stream is empty
      *
      * @return first element or {@code other} if stream is empty
-     * @since 1.2.2
+     * @since 1.0.0
      */
     public long findFirstOrElse(long other) {
         if (iterator.hasNext()) {
@@ -1377,5 +1403,23 @@ public final class LongStream implements Closeable {
             params.closeHandler.run();
             params.closeHandler = null;
         }
+    }
+
+    /**
+     * Represents an operation on two input arguments.
+     *
+     * @see #mapMulti(group.diamonddev.LongStream.LongMapMultiConsumer)
+     * @since 1.0.1
+     */
+    public interface LongMapMultiConsumer {
+
+        /**
+         * Replaces the given {@code value} with zero or more values
+         * by feeding the mapped values to the {@code consumer} consumer.
+         *
+         * @param value    the long value coming from upstream
+         * @param consumer a {@code LongConsumer} accepting the mapped values
+         */
+        void accept(long value, LongConsumer consumer);
     }
 }

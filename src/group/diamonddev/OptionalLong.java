@@ -159,7 +159,7 @@ public final class OptionalLong {
      *
      * @return a result of the transforming function
      * @throws NullPointerException if {@code function} is null
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public <R> R custom(Function<OptionalLong, R> function) {
         Objects.requireNonNull(function);
@@ -186,7 +186,7 @@ public final class OptionalLong {
      *
      * @return this {@code OptionalLong} if the value is present and doesn't matches predicate,
      * otherwise an empty {@code OptionalLong}
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public OptionalLong filterNot(LongPredicate predicate) {
         return filter(LongPredicate.Util.negate(predicate));
@@ -305,7 +305,7 @@ public final class OptionalLong {
      *
      * @return inner value if present
      * @throws NoSuchElementException if inner value is not present
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public long orElseThrow() {
         if (!isPresent) {

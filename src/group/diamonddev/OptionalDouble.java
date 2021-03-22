@@ -159,7 +159,7 @@ public final class OptionalDouble {
      *
      * @return a result of the transforming function
      * @throws NullPointerException if {@code function} is null
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public <R> R custom(Function<OptionalDouble, R> function) {
         Objects.requireNonNull(function);
@@ -186,7 +186,7 @@ public final class OptionalDouble {
      *
      * @return this {@code OptionalDouble} if the value is present and doesn't matches predicate,
      * otherwise an empty {@code OptionalDouble}
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public OptionalDouble filterNot(DoublePredicate predicate) {
         return filter(DoublePredicate.Util.negate(predicate));
@@ -323,7 +323,7 @@ public final class OptionalDouble {
      *
      * @return inner value if present
      * @throws NoSuchElementException if inner value is not present
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public double orElseThrow() {
         if (!isPresent) {

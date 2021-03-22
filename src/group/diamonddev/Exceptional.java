@@ -104,7 +104,7 @@ public class Exceptional<T> {
      * @param other the supplier function that produces value if there were any exception
      *
      * @return inner value if there were no exceptions, otherwise value produced by supplier function
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public T getOrElse(Supplier<? extends T> other) {
         return throwable == null ? value : other.get();
@@ -196,7 +196,7 @@ public class Exceptional<T> {
      *
      * @return a result of the transforming function
      * @throws NullPointerException if {@code function} is null
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public <R> R custom(Function<Exceptional<T>, R> function) {
         Objects.requireNonNull(function);
@@ -230,7 +230,7 @@ public class Exceptional<T> {
      * @param consumer a consumer function
      *
      * @return this {@code Exceptional}
-     * @since 1.1.2
+     * @since 1.0.0
      */
     public Exceptional<T> ifPresent(Consumer<? super T> consumer) {
         if (throwable == null) {
@@ -280,7 +280,7 @@ public class Exceptional<T> {
      * @return this {@code Exceptional} if there were no exceptions, otherwise
      * an {@code Exceptional} with wrapped recovering function result
      * @throws NullPointerException if {@code function} is null
-     * @since 1.1.2
+     * @since 1.0.0
      */
     public Exceptional<T> recover(final ThrowableFunction<Throwable, ? extends T, Throwable> function) {
         if (throwable == null) return this;
@@ -302,7 +302,7 @@ public class Exceptional<T> {
      * @return this {@code Exceptional} if there were no exceptions, otherwise
      * an {@code Exceptional} produced by recovering function
      * @throws NullPointerException if {@code function} or produced result is null
-     * @since 1.1.2
+     * @since 1.0.0
      */
     public Exceptional<T> recoverWith(final Function<Throwable, ? extends Exceptional<T>> function) {
         if (throwable == null) return this;

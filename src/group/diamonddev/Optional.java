@@ -131,7 +131,7 @@ public class Optional<T> {
      *
      * @return this {@code Optional}
      * @see #ifPresent(Consumer)
-     * @since 1.1.2
+     * @since 1.0.0
      */
     public Optional<T> executeIfPresent(Consumer<? super T> consumer) {
         ifPresent(consumer);
@@ -144,7 +144,7 @@ public class Optional<T> {
      * @param action action that invokes if value absent
      *
      * @return this {@code Optional}
-     * @since 1.1.2
+     * @since 1.0.0
      */
     public Optional<T> executeIfAbsent(Runnable action) {
         if (value == null)
@@ -160,7 +160,7 @@ public class Optional<T> {
      *
      * @return a result of the transforming function
      * @throws NullPointerException if {@code function} is null
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public <R> R custom(Function<Optional<T>, R> function) {
         Objects.requireNonNull(function);
@@ -187,7 +187,7 @@ public class Optional<T> {
      *
      * @return this {@code Optional} if the value is present and doesn't matches predicate,
      * otherwise an empty {@code Optional}
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public Optional<T> filterNot(Predicate<? super T> predicate) {
         return filter(Predicate.Util.negate(predicate));
@@ -355,7 +355,7 @@ public class Optional<T> {
      *
      * @return inner value if present
      * @throws NoSuchElementException if inner value is not present
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public T orElseThrow() {
         if (value == null) {

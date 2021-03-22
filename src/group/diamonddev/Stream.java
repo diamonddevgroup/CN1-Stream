@@ -4,6 +4,7 @@ import group.diamonddev.function.*;
 import group.diamonddev.internal.Compose;
 import group.diamonddev.internal.Operators;
 import group.diamonddev.internal.Params;
+import group.diamonddev.internal.SpinedBuffer;
 import group.diamonddev.iterator.IndexedIterator;
 import group.diamonddev.iterator.LazyIterator;
 import group.diamonddev.operator.*;
@@ -123,7 +124,7 @@ public class Stream<T> implements Closeable {
      * @param element the element to be passed to stream if it is non-null
      *
      * @return the new stream
-     * @since 1.1.5
+     * @since 1.0.0
      */
     @SuppressWarnings("unchecked")
     public static <T> Stream<T> ofNullable(T element) {
@@ -138,7 +139,7 @@ public class Stream<T> implements Closeable {
      * @param array the array whose elements to be passed to stream
      *
      * @return the new stream
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public static <T> Stream<T> ofNullable(final T[] array) {
         return (array == null) ? Stream.<T>empty() : Stream.of(array);
@@ -153,7 +154,7 @@ public class Stream<T> implements Closeable {
      * @param map the map with elements to be passed to stream
      *
      * @return the new stream
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public static <K, V> Stream<Map.Entry<K, V>> ofNullable(Map<K, V> map) {
         return (map == null) ? Stream.<Map.Entry<K, V>>empty() : Stream.of(map);
@@ -167,7 +168,7 @@ public class Stream<T> implements Closeable {
      * @param iterator the iterator with elements to be passed to stream
      *
      * @return the new stream
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public static <T> Stream<T> ofNullable(Iterator<? extends T> iterator) {
         return (iterator == null) ? Stream.<T>empty() : Stream.of(iterator);
@@ -181,7 +182,7 @@ public class Stream<T> implements Closeable {
      * @param iterable the {@code Iterable} with elements to be passed to stream
      *
      * @return the new stream
-     * @since 1.1.5
+     * @since 1.0.0
      */
     public static <T> Stream<T> ofNullable(Iterable<? extends T> iterable) {
         return (iterable == null) ? Stream.<T>empty() : Stream.of(iterable);
@@ -300,7 +301,7 @@ public class Stream<T> implements Closeable {
      *
      * @return the new stream
      * @throws NullPointerException if {@code op} is null
-     * @since 1.1.5
+     * @since 1.0.0
      */
     public static <T> Stream<T> iterate(
             final T seed,
@@ -353,7 +354,7 @@ public class Stream<T> implements Closeable {
      *
      * @return the new concatenated stream
      * @throws NullPointerException if {@code streams} is null
-     * @since 1.2.2
+     * @since 1.0.0
      */
     public static <T> Stream<T> concat(
             List<? extends Stream<? extends T>> streams) {
@@ -389,7 +390,7 @@ public class Stream<T> implements Closeable {
      *
      * @return the new stream
      * @throws NullPointerException if {@code iterator1} or {@code iterator2} is null
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public static <T> Stream<T> concat(
             Iterator<? extends T> iterator1,
@@ -419,7 +420,7 @@ public class Stream<T> implements Closeable {
      * @return the new concatenated stream
      * @throws NullPointerException if {@code iterator1} or {@code iterator2}
      *                              or {@code rest} is null
-     * @since 1.2.2
+     * @since 1.0.0
      */
     public static <T> Stream<T> concat(
             Iterator<? extends T> iterator1,
@@ -487,7 +488,7 @@ public class Stream<T> implements Closeable {
      *
      * @return the new stream
      * @throws NullPointerException if {@code iterator1} or {@code iterator2} is null
-     * @since 1.1.2
+     * @since 1.0.0
      */
     public static <F, S, R> Stream<R> zip(
             final Iterator<? extends F> iterator1,
@@ -524,7 +525,7 @@ public class Stream<T> implements Closeable {
      *
      * @return the new stream
      * @throws NullPointerException if {@code stream1} or {@code stream2} is null
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public static <T> Stream<T> merge(
             Stream<? extends T> stream1,
@@ -561,7 +562,7 @@ public class Stream<T> implements Closeable {
      *
      * @return the new stream
      * @throws NullPointerException if {@code iterator1} or {@code iterator2} is null
-     * @since 1.1.9
+     * @since 1.0.0
      */
     public static <T> Stream<T> merge(
             Iterator<? extends T> iterator1,
@@ -573,7 +574,7 @@ public class Stream<T> implements Closeable {
     }
 
     /**
-     * Returns internal stream iterator.
+     * Returns an internal stream iterator.
      *
      * @return internal stream iterator
      */
@@ -582,7 +583,7 @@ public class Stream<T> implements Closeable {
     }
 
     /**
-     * Applies custom operator on stream.
+     * Applies a custom operator on a stream.
      * <p>
      * Transforming function can return {@code Stream} for intermediate operations,
      * or any value for terminal operation.
@@ -659,7 +660,7 @@ public class Stream<T> implements Closeable {
      *
      * @return the new stream
      * @see #concat(Stream, Stream)
-     * @since 1.2.2
+     * @since 1.0.0
      */
     public Stream<T> prepend(Stream<? extends T> stream) {
         return Stream.concat(stream, this);
@@ -681,7 +682,7 @@ public class Stream<T> implements Closeable {
      *
      * @return the new stream
      * @see #concat(Stream, Stream)
-     * @since 1.2.2
+     * @since 1.0.0
      */
     public Stream<T> append(Stream<? extends T> stream) {
         return Stream.concat(this, stream);
@@ -828,7 +829,7 @@ public class Stream<T> implements Closeable {
      * @param object object
      *
      * @return the new stream
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public Stream<T> equalsOnly(final T object) {
         return filter(new Predicate<T>() {
@@ -1029,6 +1030,123 @@ public class Stream<T> implements Closeable {
     }
 
     /**
+     * Returns a stream consisting of the results of replacing each element of
+     * this stream with zero or more elements,
+     * that passed to the provided consumer function.
+     *
+     * <p>This is an intermediate operation.
+     *
+     * <p>Example:
+     * <pre>
+     * stream: [1, 2, 3, 4]
+     * mapper: (a, consumer) -&gt; {
+     *   consumer.accept(a);
+     *   consumer.accept(-a);
+     * }
+     * result: [1, -1, 2, -2, 3, -3, 4, -4]
+     *
+     * stream: [1, 2, 3, 4]
+     * mapper: (a, consumer) -&gt; {
+     *   if (a % 2 == 0)
+     *     consumer.accept(a * 2);
+     * }
+     * result: [4, 8]
+     * </pre>
+     *
+     * @param <R>    the type of elements in resulting stream
+     * @param mapper the mapper function used to apply to each element for producing replacing elements
+     *
+     * @return the new stream
+     * @see #flatMap(group.diamonddev.function.Function)
+     * @since 1.0.1
+     */
+    public <R> Stream<R> mapMulti(final BiConsumer<? super T, ? super Consumer<R>> mapper) {
+        return flatMap(new Function<T, Stream<? extends R>>() {
+            @Override
+            public Stream<? extends R> apply(T t) {
+                SpinedBuffer.Of<R> buffer = new SpinedBuffer.Of<R>();
+                mapper.accept(t, buffer);
+                return of(buffer.iterator());
+            }
+        });
+    }
+
+    /**
+     * Returns a stream consisting of the results of replacing each element of
+     * this stream with zero or more elements,
+     * that passed to the provided consumer function.
+     *
+     * <p>This is an intermediate operation.
+     *
+     * @param mapper the mapper function used to apply to each element for producing replacing elements
+     *
+     * @return the new stream
+     * @see #mapMulti(group.diamonddev.function.BiConsumer)
+     * @see #flatMapToInt(group.diamonddev.function.Function)
+     * @since 1.0.1
+     */
+    public IntStream mapMultiToInt(final BiConsumer<? super T, ? super IntConsumer> mapper) {
+        return flatMapToInt(new Function<T, IntStream>() {
+            @Override
+            public IntStream apply(T t) {
+                SpinedBuffer.OfInt buffer = new SpinedBuffer.OfInt();
+                mapper.accept(t, buffer);
+                return IntStream.of(buffer.iterator());
+            }
+        });
+    }
+
+    /**
+     * Returns a stream consisting of the results of replacing each element of
+     * this stream with zero or more elements,
+     * that passed to the provided consumer function.
+     *
+     * <p>This is an intermediate operation.
+     *
+     * @param mapper the mapper function used to apply to each element for producing replacing elements
+     *
+     * @return the new stream
+     * @see #mapMulti(group.diamonddev.function.BiConsumer)
+     * @see #flatMapToLong(group.diamonddev.function.Function)
+     * @since 1.0.1
+     */
+    public LongStream mapMultiToLong(final BiConsumer<? super T, ? super LongConsumer> mapper) {
+        return flatMapToLong(new Function<T, LongStream>() {
+            @Override
+            public LongStream apply(T t) {
+                SpinedBuffer.OfLong buffer = new SpinedBuffer.OfLong();
+                mapper.accept(t, buffer);
+                return LongStream.of(buffer.iterator());
+            }
+        });
+    }
+
+    /**
+     * Returns a stream consisting of the results of replacing each element of
+     * this stream with zero or more elements,
+     * that passed to the provided consumer function.
+     *
+     * <p>This is an intermediate operation.
+     *
+     * @param mapper the mapper function used to apply to each element for producing replacing elements
+     *
+     * @return the new stream
+     * @see #mapMulti(group.diamonddev.function.BiConsumer)
+     * @see #flatMapToDouble(group.diamonddev.function.Function)
+     * @since 1.0.1
+     */
+    public DoubleStream mapMultiToDouble(final BiConsumer<? super T, ? super DoubleConsumer> mapper) {
+        return flatMapToDouble(new Function<T, DoubleStream>() {
+            @Override
+            public DoubleStream apply(T t) {
+                SpinedBuffer.OfDouble buffer = new SpinedBuffer.OfDouble();
+                mapper.accept(t, buffer);
+                return DoubleStream.of(buffer.iterator());
+            }
+        });
+    }
+
+    /**
      * Returns {@code Stream} with indexed elements.
      * Indexing starts from 0 with step 1.
      *
@@ -1041,7 +1159,7 @@ public class Stream<T> implements Closeable {
      * </pre>
      *
      * @return the new {@code IntPair} stream
-     * @since 1.1.2
+     * @since 1.0.0
      */
     public Stream<IntPair<T>> indexed() {
         return indexed(0, 1);
@@ -1063,7 +1181,7 @@ public class Stream<T> implements Closeable {
      * @param step the step
      *
      * @return the new {@code IntPair} stream
-     * @since 1.1.2
+     * @since 1.0.0
      */
     public Stream<IntPair<T>> indexed(final int from, final int step) {
         return mapIndexed(from, step, new IndexedFunction<T, IntPair<T>>() {
@@ -1336,7 +1454,7 @@ public class Stream<T> implements Closeable {
     }
 
     /**
-     * Returns a {@code Stream} produced by iterative application of a accumulation function
+     * Returns a {@code Stream} produced by iterative application of an accumulation function
      * to reduction value and next element of the current stream.
      * Produces a {@code Stream} consisting of {@code value1}, {@code acc(value1, value2)},
      * {@code acc(acc(value1, value2), value3)}, etc.
@@ -1362,7 +1480,7 @@ public class Stream<T> implements Closeable {
     }
 
     /**
-     * Returns a {@code Stream} produced by iterative application of a accumulation function
+     * Returns a {@code Stream} produced by iterative application of an accumulation function
      * to an initial element {@code identity} and next element of the current stream.
      * Produces a {@code Stream} consisting of {@code identity}, {@code acc(identity, value1)},
      * {@code acc(acc(identity, value1), value2)}, etc.
@@ -1724,7 +1842,7 @@ public class Stream<T> implements Closeable {
     }
 
     /**
-     * Reduces the elements using provided identity value and the associative accumulation function.
+     * Reduces the elements using provided identity value, and the associative accumulation function.
      *
      * <p>This is a terminal operation.
      *
@@ -1753,7 +1871,7 @@ public class Stream<T> implements Closeable {
     }
 
     /**
-     * Reduces the elements using provided identity value and
+     * Reduces the elements using provided identity value, and
      * the associative accumulation the indexed function.
      *
      * <p>This is a terminal operation.
@@ -1780,7 +1898,7 @@ public class Stream<T> implements Closeable {
     }
 
     /**
-     * Reduces the elements using provided identity value and
+     * Reduces the elements using provided identity value, and
      * the associative accumulation the indexed function.
      *
      * <p>This is a terminal operation.
@@ -1867,7 +1985,7 @@ public class Stream<T> implements Closeable {
      * <p>This is a terminal operation.
      *
      * @param <R>       the type of the result
-     * @param generator the array constructor reference that accommodates future array of assigned size
+     * @param generator the array constructor reference that accommodates a future array of assigned size
      *
      * @return the result of collect elements
      */
@@ -1885,7 +2003,7 @@ public class Stream<T> implements Closeable {
      *
      * @return a new {@code List}
      * @see Collectors#toList()
-     * @since 1.1.5
+     * @since 1.0.0
      */
     public List<T> toList() {
         final List<T> result = new ArrayList<T>();
@@ -2151,7 +2269,7 @@ public class Stream<T> implements Closeable {
      * @param other the other element to return if stream is empty
      *
      * @return first element or {@code other} if stream is empty
-     * @since 1.2.2
+     * @since 1.0.0
      */
     public T findFirstOrElse(T other) {
         if (iterator.hasNext()) {
@@ -2201,7 +2319,7 @@ public class Stream<T> implements Closeable {
      * @return single element of stream
      * @throws NoSuchElementException if stream is empty
      * @throws IllegalStateException  if stream contains more than one element
-     * @since 1.1.2
+     * @since 1.0.0
      */
     public T single() {
         if (iterator.hasNext()) {
@@ -2237,7 +2355,7 @@ public class Stream<T> implements Closeable {
      *
      * @return an {@code Optional} with single element or {@code Optional.empty()} if stream is empty
      * @throws IllegalStateException if stream contains more than one element
-     * @since 1.1.2
+     * @since 1.0.0
      */
     public Optional<T> findSingle() {
         if (iterator.hasNext()) {
